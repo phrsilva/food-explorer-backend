@@ -1,11 +1,8 @@
-class ErroNoApp {
-    mensagemDeErro;
-    codigoDoErro;
-  
-    constructor(mensagemDeErro, codigoDoErro = 400) {
-      this.mensagemDeErro = mensagemDeErro;
-      this.codigoDoErro = codigoDoErro;
-    }
+class ErroNoApp extends Error {
+  constructor(message, statusCode = 500) {
+    super(message);
+    this.statusCode = statusCode;
   }
-  
-  module.exports = ErroNoApp;
+}
+
+module.exports = ErroNoApp;

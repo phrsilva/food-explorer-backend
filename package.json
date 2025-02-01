@@ -15,6 +15,7 @@
     "license": "ISC",
     "description": "",
     "dependencies": {
+        "aula-1": "file:",
         "axios": "^1.7.9",
         "bcryptjs": "^2.4.3",
         "cookie-parser": "^1.4.7",

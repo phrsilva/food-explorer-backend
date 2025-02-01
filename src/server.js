@@ -3,9 +3,9 @@ require("express-async-errors");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const express = require("express");
-const routes = require("./rotas");
 
 const ErroNoApp = require("./utils/ErroNoApp");
+const rotas = require("./rotas");
 
 const app = express();
 app.use(express.json());
@@ -15,23 +15,20 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(routes);
+app.use(rotas);
 
-app.use((err, request, response, next) => {
-    if (err instanceof ErroNoApp) {
-        return response.status(err.statusCode).json({
-            status: "error",
-            mensagemDeErro: err.mensagemDeErro,
-        });
-    }
-    
+// Middleware de tratamento de erros
+app.use((err, req, res, next) => {
     console.error(err);
-    
-    return response.status(500).json({
-        status: "error",
-        mensagemDeErro: "Internal server error",
-    });
-});
+  
+    // Verifica se o erro é uma instância de ErroNoApp
+    if (err instanceof ErroNoApp) {
+      return res.status(err.statusCode).json({ error: err.message });
+    }
+  
+    // Erro genérico
+    return res.status(500).json({ error: 'Erro interno no servidor!' });
+  });
 
 const PORT = 3000;
 
