@@ -47,13 +47,13 @@ class ControladorPratos {
         const { nome, descricao, preco, ingredientes, categoria } = req.body;
 
         const banco = await bancoDeDados();
-        const prato = await banco.get(`SELECT * FROM pratos WHERE id = ${id}`);
+        const prato = await banco.get(`SELECT * FROM pratos WHERE id = ?`, [id]);
 
         if (!prato) {
             throw new ErroNoApp("Prato nao encontrado", 404);
         }
 
-        if (!nome || !descricao || !preco || !ingredientes, categoria) {
+        if (!nome || !descricao || !preco || !ingredientes || ! categoria) {
             throw new ErroNoApp("Todos os campos devem ser preenchidos", 400);
         }
 
@@ -61,7 +61,7 @@ class ControladorPratos {
             nome = ?,
             descricao = ?,
             preco = ?, 
-            categoria = ?,
+            categoria = ?
             WHERE id = ?`, [nome, descricao, preco, categoria, id]);
 
         await banco.run(`DELETE FROM ingredientes WHERE prato_id = ?`, [id]);
