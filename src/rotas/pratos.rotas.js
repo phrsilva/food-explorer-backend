@@ -5,5 +5,6 @@ const rotasDePratos = Router();
 
 rotasDePratos.post('/', controladorPratos.create);
 rotasDePratos.put('/:id', controladorPratos.update);
+rotasDePratos.delete('/:id', controladorPratos.delete);
 
 module.exports = rotasDePratos;

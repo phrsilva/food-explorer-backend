@@ -68,23 +68,34 @@ class ControladorPratos {
         await Promise.all(inserirIngredientes);
 
         return res.status(200).json({ message: "Prato atualizado com sucesso!" });
-
-    }
-
-    async index(req, res) {
-
-    }
-
-    async show(req, res) {
-
-    }
-
-
-    async delete(req, res) {
-
         
-
     }
+   async delete(req, res) {
+
+        const { id } = req.params;
+
+        const prato = await knex("pratos").where({ id }).first();
+
+        if (!prato) {
+            throw new ErroNoApp("Prato nao encontrado", 404);
+        }
+
+        await knex("ingredientes").where({ prato_id: id }).delete();
+
+        await knex("pratos").where({ id }).delete();
+
+        return res.status(200).json({ message: "Prato deletado com sucesso!" });
+        
+    }
+    
+    async index(req, res) {
+                
+    }
+    
+    async show(req, res) {
+                
+    }
+   
 }
 
 module.exports = new ControladorPratos();
