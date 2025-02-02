@@ -1,5 +1,6 @@
 const {Router} = require('express');
 
+
 const controladorUsuarios = require('../controladores/ControladorUsuarios');
 
 const rotasDeUsuario = Router();

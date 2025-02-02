@@ -1,26 +1,15 @@
 const path = require('path');
 const multer = require('multer');
-const crypto = require('crypto');
 
-const TMP_FOLDER = path.resolve(__dirname, '..', '..', 'tmp');
-const UPLOADS_FOLDER = path.resolve(__dirname, '..', '..', 'uploads');
-
-const MULTER = {
+const uploadConfig = {
     storage: multer.diskStorage({
-        destination: TMP_FOLDER,
-        filename(request, file, callback) {
-            const fileHash = crypto.randomBytes(10).toString('hex');
-            const fileName = `${fileHash}-${file.originalname}`;
-            callback(null, fileName);
-        },
-        
-    }),
-    
-}
+        destination: path.resolve(__dirname, "..", "uploads"), // Pasta onde as fotos serão salvas
+        filename: (req, file, callback) => {
+            const ext = path.extname(file.originalname); // Extensão do arquivo
+            const name = path.basename(file.originalname, ext); // Nome do arquivo sem extensão
+            callback(null, `${name}-${Date.now()}${ext}`); // Nome único para o arquivo
+        }
+    })
+};
 
-
-module.exports = {
-    TMP_FOLDER,
-    UPLOADS_FOLDER: path.resolve(TMP_FOLDER, 'uploads'),
-    MULTER
-}
+module.exports = uploadConfig;
