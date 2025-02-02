@@ -12,8 +12,8 @@ function garantirAutenticacao(req, res, next) {
     const [, token] = cabecalhoAutenticacao.split(" ");
 
     try {
-        const { sub: usuario.id } = verify(token, configuracaoDeAutenticacao.jwt.secret);
-        req.usuario = { id: Number(usuario.id) };
+        const { sub: usuario_id } = verify(token, configuracaoDeAutenticacao.jwt.secret);
+        req.usuario = { id: Number(usuario_id) };
         return next();
     } catch (error) {
         throw new ErroNoApp("Token inválido", 401);
