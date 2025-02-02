@@ -117,6 +117,23 @@ class ControladorPratos {
     }
     
     async show(req, res) {
+
+        const { id } = req.params;
+
+        const prato = await knex("pratos").where({ id }).first();
+
+        if (!prato) {
+            throw new ErroNoApp("Prato não encontrado", 404);        
+        }
+
+        return res.json({
+            id: prato.id,
+            nome: prato.nome,
+            descricao: prato.descricao,
+            preco: prato.preco,
+            categoria: prato.categoria,
+            ingredientes: prato.ingredientes
+        });
                 
     }
    
