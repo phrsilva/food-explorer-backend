@@ -29,7 +29,15 @@ class ControladorSessao {
             expiresIn
         });
 
-        return res.json({ token });
+        return res.json({
+            usuario: {
+                id: usuario.id,
+                name: usuario.name,
+                email: usuario.email
+            },
+            token
+        });
+        
     }
 }
 
