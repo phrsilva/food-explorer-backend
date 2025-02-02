@@ -96,6 +96,23 @@ class ControladorPratos {
     }
     
     async index(req, res) {
+        
+        const pratos = await knex("pratos").select("*");
+
+        if (!pratos) {
+            throw new ErroNoApp("Nenhum prato cadastrado", 404);
+        }
+
+        return res.json(pratos.map(prato => {
+            return {
+                id: prato.id,
+                nome: prato.nome,
+                descricao: prato.descricao,
+                preco: prato.preco,
+                categoria: prato.categoria,
+                ingredientes: prato.ingredientes
+            }
+        }));
                 
     }
     
