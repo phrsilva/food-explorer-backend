@@ -5,16 +5,22 @@ const bancoDeDados = require("../baseDeDados/index");
 class ControladorPratos {
     async create(req, res) {
 
-        const { nome, descricao, preco, ingredientes } = req.body;
+        const { nome, descricao, preco, categoria, ingredientes } = req.body;
 
-        if (!nome || !descricao || !preco || !ingredientes ) {
+        if (!nome || !descricao || !preco || !ingredientes || !categoria) {
             throw new ErroNoApp("Todos os campos devem ser preenchidos", 400);
+        }
+
+        // se a categoria não existir no enum, lançar erro
+        if (!["entrada", "principal", "sobremesa"].includes(categoria)) {
+            throw new ErroNoApp("Categoria inválida", 400);
         }
 
         const [prato_id] = await knex("pratos").insert({
             nome,
             descricao,
-            preco
+            preco,
+            categoria
         });
 
         const inserirIngredientes = ingredientes.map(ingrediente => {
@@ -38,7 +44,7 @@ class ControladorPratos {
 
         const { id } = req.params;
 
-        const { nome, descricao, preco, ingredientes } = req.body;
+        const { nome, descricao, preco, ingredientes, categoria } = req.body;
 
         const banco = await bancoDeDados();
         const prato = await banco.get(`SELECT * FROM pratos WHERE id = ${id}`);
@@ -47,15 +53,16 @@ class ControladorPratos {
             throw new ErroNoApp("Prato nao encontrado", 404);
         }
 
-        if (!nome || !descricao || !preco || !ingredientes) {
+        if (!nome || !descricao || !preco || !ingredientes, categoria) {
             throw new ErroNoApp("Todos os campos devem ser preenchidos", 400);
         }
 
         await banco.run(`UPDATE pratos SET
             nome = ?,
             descricao = ?,
-            preco = ?
-            WHERE id = ?`, [nome, descricao, preco, id]);
+            preco = ?, 
+            categoria = ?,
+            WHERE id = ?`, [nome, descricao, preco, categoria, id]);
 
         await banco.run(`DELETE FROM ingredientes WHERE prato_id = ?`, [id]);
 
