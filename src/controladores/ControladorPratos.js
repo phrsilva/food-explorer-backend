@@ -103,6 +103,9 @@ class ControladorPratos {
             throw new ErroNoApp("Nenhum prato cadastrado", 404);
         }
 
+
+        
+
         return res.json(pratos.map(prato => {
 
             const fotoUrl = prato.foto ? `${req.protocol}://${req.get('host')}/uploads/${prato.foto}` : null;;
@@ -112,7 +115,7 @@ class ControladorPratos {
                 descricao: prato.descricao,
                 preco: prato.preco,
                 categoria: prato.categoria,
-                ingredientes: prato.ingredientes,
+                
                 foto: fotoUrl
             }
         }));
@@ -131,17 +134,21 @@ class ControladorPratos {
 
         // Gera a URL completa da imagem do prato
         
-        const fotoUrl = prato.foto ? `${req.protocol}://${req.get('host')}/uploads/${pratos.foto}` : null;;
-
+        const ingredientes = await knex("ingredientes").select("*").where("prato_id", "=", prato.id);
+        console.log(ingredientes);
+        
+        const fotoUrl = prato.foto ? `${req.protocol}://${req.get('host')}/uploads/${prato.foto}` : null;;
         return res.json({
+
             id: prato.id,
             nome: prato.nome,
             descricao: prato.descricao,
             preco: prato.preco,
             categoria: prato.categoria,
-            ingredientes: prato.ingredientes,
+            ingredientes,
             foto: fotoUrl
         });
+
                 
     }
    
