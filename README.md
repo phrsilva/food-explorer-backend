@@ -25,7 +25,7 @@ Neste repositório trago minha solução ao desafio, bem como seu deploy atravé
 
 ![SQLITE3](https://img.shields.io/badge/sqlite3-grey?style=for-the-badge&logo=sqlite)
 
-![Cors](https://img.shields.io/badge/cors-grey?style=for-the-badge&logo=cors)
+![Knex](https://img.shields.io/badge/knex-grey?style=for-the-badge&logo=knexdotjs)
 
 ## Principais funcionalidades 
 
