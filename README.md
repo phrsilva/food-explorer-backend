@@ -23,7 +23,7 @@ Neste repositório trago minha solução ao desafio, bem como seu deploy atravé
 
 ![Javascript](https://img.shields.io/badge/Javascript-grey?style=for-the-badge&logo=javascript)
 
-![SQLITE3](https://img.shields.io/badge/sqlite3-grey?style=for-the-badge&logo=sqlite3)
+![SQLITE3](https://img.shields.io/badge/sqlite3-grey?style=for-the-badge&logo=sqlite)
 
 ![Cors](https://img.shields.io/badge/cors-grey?style=for-the-badge&logo=cors)
 
