@@ -104,13 +104,16 @@ class ControladorPratos {
         }
 
         return res.json(pratos.map(prato => {
+
+            const fotoUrl = prato.foto ? `${req.protocol}://${req.get('host')}/uploads/${prato.foto}` : null;;
             return {
                 id: prato.id,
                 nome: prato.nome,
                 descricao: prato.descricao,
                 preco: prato.preco,
                 categoria: prato.categoria,
-                ingredientes: prato.ingredientes
+                ingredientes: prato.ingredientes,
+                foto: fotoUrl
             }
         }));
                 
@@ -126,13 +129,18 @@ class ControladorPratos {
             throw new ErroNoApp("Prato não encontrado", 404);        
         }
 
+        // Gera a URL completa da imagem do prato
+        
+        const fotoUrl = prato.foto ? `${req.protocol}://${req.get('host')}/uploads/${pratos.foto}` : null;;
+
         return res.json({
             id: prato.id,
             nome: prato.nome,
             descricao: prato.descricao,
             preco: prato.preco,
             categoria: prato.categoria,
-            ingredientes: prato.ingredientes
+            ingredientes: prato.ingredientes,
+            foto: fotoUrl
         });
                 
     }

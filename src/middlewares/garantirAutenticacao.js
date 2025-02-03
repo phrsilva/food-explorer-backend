@@ -4,6 +4,7 @@ const configuracaoDeAutenticacao = require("../configs/aut");
 
 function garantirAutenticacao(req, res, next) {
     const cabecalhoAutenticacao = req.headers.authorization;
+    console.log(cabecalhoAutenticacao);
 
     if (!cabecalhoAutenticacao) {
         throw new ErroNoApp("Token não informado", 401);
@@ -19,5 +20,6 @@ function garantirAutenticacao(req, res, next) {
         throw new ErroNoApp("Token inválido", 401);
     }
 }
+
 
 module.exports = garantirAutenticacao;
