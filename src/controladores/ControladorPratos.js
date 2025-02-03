@@ -135,7 +135,6 @@ class ControladorPratos {
         // Gera a URL completa da imagem do prato
         
         const ingredientes = await knex("ingredientes").select("*").where("prato_id", "=", prato.id);
-        console.log(ingredientes);
         
         const fotoUrl = prato.foto ? `${req.protocol}://${req.get('host')}/uploads/${prato.foto}` : null;;
         return res.json({
