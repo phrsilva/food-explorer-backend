@@ -4,7 +4,7 @@ const configuracaoDeAutenticacao = require("../configs/aut");
 
 function garantirAutenticacao(req, res, next) {
     const cabecalhoAutenticacao = req.headers.authorization;
-    console.log(cabecalhoAutenticacao);
+    //console.log(cabecalhoAutenticacao);
 
     if (!cabecalhoAutenticacao) {
         throw new ErroNoApp("Token não informado", 401);
