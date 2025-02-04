@@ -59,7 +59,7 @@ Ou, faça o download do arquivo zip através do Github
 ## Deploy
 
 O Deploy do frontend foi realizado através do Render.
-Link do Deploy: [food-explorer-](render.com)
+Link do Deploy: [food-explorer](https://food-explorer-backend-uscw.onrender.com/)
 
 ## Licença
 
