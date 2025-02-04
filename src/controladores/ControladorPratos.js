@@ -54,6 +54,7 @@ class ControladorPratos {
         }
 
         if (!nome || !descricao || !preco || !ingredientes || ! categoria) {
+            console.log("Request body:", req.body);
             throw new ErroNoApp("Todos os campos devem ser preenchidos", 400);
         }
 

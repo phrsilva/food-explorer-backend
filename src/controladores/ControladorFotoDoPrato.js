@@ -16,10 +16,7 @@ class ControladorFotoDoPrato {
             throw new ErroNoApp("Prato nao encontrado", 404);
         }
 
-        if (prato.foto) {
-            await diskStorage.deleteFile(prato.foto)
-        }
-
+        
         await knex("pratos").where({ id }).update({
             foto: nomeDaFoto
         })
