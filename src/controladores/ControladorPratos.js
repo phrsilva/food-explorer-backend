@@ -3,42 +3,76 @@ const ErroNoApp = require("../utils/ErroNoApp");
 const bancoDeDados = require("../baseDeDados/index");
 
 class ControladorPratos {
+    // async create(req, res) {
+
+    //     const { nome, descricao, preco, categoria, ingredientes } = req.body;
+
+    //     if (!nome || !descricao || !preco || !ingredientes || !categoria) {
+    //         throw new ErroNoApp("Todos os campos devem ser preenchidos", 400);
+    //     }
+
+    //     // se a categoria não existir no enum, lançar erro
+    //     if (!["entrada", "principal", "sobremesa"].includes(categoria)) {
+    //         throw new ErroNoApp("Categoria inválida", 400);
+    //     }
+
+    //     const [prato_id] = await knex("pratos").insert({
+    //         nome,
+    //         descricao,
+    //         preco,
+    //         categoria
+    //     });
+
+    //     const inserirIngredientes = ingredientes.map(ingrediente => {
+    //         return knex("ingredientes").insert({
+    //             nome: ingrediente,
+    //             prato_id
+    //         });
+    //     });
+
+    //     await Promise.all(inserirIngredientes);
+
+
+
+    //     return res.status(201).json({ message: "Prato criado com sucesso!" });
+
+
+
+    // }
+
     async create(req, res) {
-
+        console.log("Corpo da requisição recebido:", req.body); // ✅ Verifica os dados recebidos no backend
+    
         const { nome, descricao, preco, categoria, ingredientes } = req.body;
-
-        if (!nome || !descricao || !preco || !ingredientes || !categoria) {
+    
+        if (!nome || !descricao || !preco || !ingredientes.length || !categoria) {
             throw new ErroNoApp("Todos os campos devem ser preenchidos", 400);
         }
-
-        // se a categoria não existir no enum, lançar erro
+    
         if (!["entrada", "principal", "sobremesa"].includes(categoria)) {
             throw new ErroNoApp("Categoria inválida", 400);
         }
-
+    
         const [prato_id] = await knex("pratos").insert({
             nome,
             descricao,
             preco,
-            categoria
+            categoria,
         });
-
+    
         const inserirIngredientes = ingredientes.map(ingrediente => {
             return knex("ingredientes").insert({
                 nome: ingrediente,
-                prato_id
+                prato_id,
             });
         });
-
+    
         await Promise.all(inserirIngredientes);
-
-
-
-        return res.status(201).json({ message: "Prato criado com sucesso!" });
-
-
-
+    
+        return res.status(201).json({ id: prato_id, message: "Prato criado com sucesso!" }); // ✅ Retorna o ID do prato criado
     }
+    
+    
 
     async update(req, res) {
 
