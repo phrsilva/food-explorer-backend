@@ -9,11 +9,13 @@ const ErroNoApp = require("./utils/ErroNoApp");
 const rotas = require("./rotas");
 
 const app = express();
-app.use(express.json());
+
 app.use(cors({
-  origin: ["http://localhost:5173", "http://127.0.0.1:5173", "https://food-explorer-backend-uscw.onrender.com/" ],
+  origin: ["http://localhost:5173", "http://127.0.0.1:5173", "https://food-explorer-phrsilva.netlify.app"],
   credentials: true
 }));
+
+app.use(express.json());
 
 app.use(rotas);
 app.use("/uploads", express.static(path.resolve(__dirname, "uploads")));
