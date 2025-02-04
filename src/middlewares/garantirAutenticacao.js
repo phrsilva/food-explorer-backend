@@ -2,15 +2,12 @@ const { verify } = require("jsonwebtoken");
 const ErroNoApp = require("../utils/ErroNoApp");
 const configuracaoDeAutenticacao = require("../configs/aut");
 
-function garantirAutenticacao(req, res, next) {
-    const cabecalhoAutenticacao = req.headers.authorization;
+async function garantirAutenticacao(req, res, next) {
+    const cabecalhoAutenticacao = await req.headers.authorization;
 
-    
     if (!cabecalhoAutenticacao) {
         throw new ErroNoApp("Token não informado", 401);
     }
-
-
 
     const [, token] = cabecalhoAutenticacao.split(" ");
 
