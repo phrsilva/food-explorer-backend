@@ -32,8 +32,9 @@ class ControladorSessao {
         return res.json({
             usuario: {
                 id: usuario.id,
-                name: usuario.name,
-                email: usuario.email
+                nome: usuario.nome,
+                email: usuario.email,
+                pefil: usuario.perfil
             },
             token
         });
