@@ -10,6 +10,7 @@ const rotas = Router();
 rotas.use("/usuarios", rotasDeUsuarios);
 rotas.use("/pratos", rotasDePratos);
 rotas.use("/sessao", rotasDeSessao);
+rotas.use("/busca", rotasDePratos);
 
 
 module.exports = rotas;
