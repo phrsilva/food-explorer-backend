@@ -56,6 +56,9 @@ npm run dev
 
 Ou, faça o download do arquivo zip através do Github
 
+### Usuário admin 
+Para utilizar a aplicação em perfil de administrador, é preciso modificar o perfil do usuário diretamente no banco de dados.
+
 ## Deploy
 
 O Deploy do frontend foi realizado através do Render.
